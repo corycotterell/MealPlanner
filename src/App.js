@@ -19,7 +19,10 @@ class App extends Component {
         this.setState({
           isLoaded:true,
           ingredients:obj.data.hits[0].recipe.ingredients,
-          mealInformation:obj.data.hits[0]
+          mealInformation:obj.data.hits[0],
+          ingredients2:obj.data.hits[1].recipe.ingredients,
+          mealInformation2:obj.data.hits[1]
+
         })
       })
     }
@@ -28,9 +31,8 @@ class App extends Component {
       return (
       <div className="App">
       <h1 color="aquamarine">Welcome To The Meal Planner</h1>
-      <ul className="No-Bullets">
       <DisplayRecipe mealInformation = {this.state.mealInformation} ingredients={this.state.ingredients}/>
-      </ul>
+      <DisplayRecipe mealInformation = {this.state.mealInformation2} ingredients={this.state.ingredients2}/>
       </div>
     );
       } else{
