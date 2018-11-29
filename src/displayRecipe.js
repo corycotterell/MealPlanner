@@ -3,11 +3,15 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import "./displayRecipe.css"
 
+
 export default class DisplayRecipe extends Component{
+    constructor(props){
+        super(props)
+    }
     render(){
         return(
-                <div className="grid-container">
-                <Card className="grid-item">
+                <div className="grid-item">
+                <Card>
                     <CardImg top width="50%" src={this.props.mealInformation.recipe.image} alt="Card image cap" />
                     <CardBody className="Inner-card-color">
                         <CardTitle>{this.props.mealInformation.recipe.label}</CardTitle>

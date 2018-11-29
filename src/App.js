@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios"
-import DisplayRecipe from "./displayRecipe"
+import DisplayRecipe from "./displayRecipe.js"
+import "./displayRecipe.css"
+
 class App extends Component {
   constructor(){
     super()
@@ -16,12 +18,13 @@ class App extends Component {
     componentDidMount(){
       axios.get(this.link)
       .then((obj) =>{
+        let results = []
+        for (var i = 0; i < obj.data.hits.length; i++){
+          results.push(obj.data.hits[i])
+        }
         this.setState({
           isLoaded:true,
-          ingredients:obj.data.hits[0].recipe.ingredients,
-          mealInformation:obj.data.hits[0],
-          ingredients2:obj.data.hits[1].recipe.ingredients,
-          mealInformation2:obj.data.hits[1]
+          results:results
 
         })
       })
@@ -29,10 +32,13 @@ class App extends Component {
   render() {
     if (this.state.isLoaded){
       return (
-      <div className="App">
-      <h1 color="aquamarine">Welcome To The Meal Planner</h1>
-      <DisplayRecipe mealInformation = {this.state.mealInformation} ingredients={this.state.ingredients}/>
-      <DisplayRecipe mealInformation = {this.state.mealInformation2} ingredients={this.state.ingredients2}/>
+      <div>
+      <h1> Welcome to the Planner broski</h1>
+      <div className="grid-container">
+      {this.state.results.map((item) => {
+        return(<DisplayRecipe mealInformation = {item} ingredients={item.recipe.ingredients}/>)
+      })}
+      </div>
       </div>
     );
       } else{
